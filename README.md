@@ -6,6 +6,8 @@ Gestor de tareas ligero y responsive hecho con **HTML, CSS y JavaScript vanilla*
 
 **Demo:** [https://sburgos28.github.io/lista-personal/](https://sburgos28.github.io/lista-personal/)
 
+![Demo de Lista Personal: crear tareas, completarlas, filtrar y cambiar de tema](assets/demo.gif)
+
 ![Vista previa de Lista Personal en modo oscuro](assets/preview.png)
 
 <details>
@@ -57,10 +59,12 @@ lista-personal/
 │   ├── theme.js            # Tema oscuro/claro y persistencia de la preferencia
 │   └── app.js              # Eventos, filtros y conexión de las capas
 ├── assets/
+│   ├── demo.gif
 │   ├── favicon.svg
 │   ├── preview.png
 │   ├── preview-mobile.png
 │   └── preview-light.png
+├── LICENSE
 └── README.md
 ```
 
@@ -270,6 +274,10 @@ git push -u origin main
 ## Autor
 
 Santiago Burgos — [@sburgos28](https://github.com/sburgos28)
+
+## Licencia
+
+Este proyecto está bajo la licencia MIT. Consulta [LICENSE](LICENSE).
 
 ---
 
