@@ -128,7 +128,7 @@ La preferencia visual se guarda aparte:
 localStorage.setItem('lista-personal.theme', 'dark'); // o 'light'
 ```
 
-Al cargar la página, `storage.js` valida cada tarea. Si el JSON está corrupto o alguien manipuló los datos manualmente, la aplicación descarta lo inválido y no se rompe.
+Al cargar la página, `storage.js` valida cada tarea. Si el JSON está corrupto o alguien manipuló los datos manualmente, la aplicación descarta lo inválido, no se rompe y muestra un aviso de que no pudo leer las tareas.
 
 ### ¿Cómo funciona el tema oscuro?
 
@@ -199,7 +199,7 @@ Para un gestor personal de tareas, `localStorage` es una elección razonable: el
 - [ ] Crear varias tareas, recargar y comprobar que se mantienen el orden, la prioridad y el estado completado.
 - [ ] Inspeccionar `localStorage` y verificar que la clave es `lista-personal.tasks.v1` y que contiene JSON válido.
 - [ ] Comprobar que la preferencia de tema está en `lista-personal.theme`.
-- [ ] Corromper manualmente el valor de `localStorage` y recargar: la app debe arrancar vacía sin errores graves.
+- [ ] Corromper manualmente el valor de `localStorage` y recargar: la app debe arrancar vacía y mostrar un aviso de que no se pudieron leer las tareas.
 - [ ] Probar en una ventana privada o con el almacenamiento bloqueado: debe aparecer el aviso y la app debe seguir funcionando en memoria.
 
 ### Seguridad
@@ -273,7 +273,7 @@ git push -u origin main
 
 ## Autor
 
-Santiago Burgos — [@sburgos28](https://github.com/sburgos28)
+Santiago Burgos ([@sburgos28](https://github.com/sburgos28))
 
 ## Licencia
 

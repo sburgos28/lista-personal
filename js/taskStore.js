@@ -37,10 +37,10 @@ function cleanPriority(priority) {
  * Crea una instancia del store. Se usa una clausura para mantener el array
  * privado: desde fuera solo se accede mediante los métodos públicos.
  *
- * @param {{ onSaveError?: () => void }} [options]
+ * @param {{ onSaveError?: () => void, onLoadError?: (error: unknown) => void }} [options]
  */
-export function createTaskStore({ onSaveError } = {}) {
-  let tasks = loadTasks();
+export function createTaskStore({ onSaveError, onLoadError } = {}) {
+  let tasks = loadTasks({ onError: onLoadError });
 
   function persist() {
     const saved = saveTasks(tasks);

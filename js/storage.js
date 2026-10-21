@@ -48,9 +48,10 @@ function normalizeStoredTask(value) {
  * Lee las tareas guardadas. Nunca lanza una excepción: si algo falla,
  * devuelve una lista vacía para que la aplicación siga funcionando.
  *
+ * @param {{ onError?: (error: unknown) => void }} [options]
  * @returns {Array<object>}
  */
-export function loadTasks() {
+export function loadTasks({ onError } = {}) {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (!raw) return [];
@@ -61,8 +62,9 @@ export function loadTasks() {
     return parsed.map(normalizeStoredTask).filter(Boolean);
   } catch (error) {
     // JSON corrupto o almacenamiento bloqueado. Preferimos empezar limpio
-    // antes que romper toda la interfaz.
+    // antes que romper toda la interfaz, pero avisamos a quien escuche.
     console.warn('Lista Personal: no se pudieron leer las tareas guardadas.', error);
+    onError?.(error);
     return [];
   }
 }

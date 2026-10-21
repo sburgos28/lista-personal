@@ -28,6 +28,8 @@
   --text-soft: #4d576b;
   --text-faint: #5f687a;
   --line: #e6e9f1;
+  --control-border: #7d8a9e;
+  --control-border-hover: #4d576b;
 
   --primary: #5a54e8;
   --primary-strong: #4740c9;
@@ -36,7 +38,7 @@
   --success-soft: #e7f8ef;
   --warning: #8a5a0a;
   --warning-soft: #fdf3dc;
-  --danger: #d64545;
+  --danger: #bf3a3a;
   --danger-soft: #fdecec;
 
   --radius-sm: 10px;
@@ -76,12 +78,7 @@ body {
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 
-  /* Fondo: puntos muy suaves + halos de color + degradado base. */
-  background:
-    radial-gradient(circle at 1px 1px, rgb(23 26 38 / 6%) 1px, transparent 0) 0 0 / 22px 22px,
-    radial-gradient(58rem 58rem at 88% -10%, rgb(149 141 255 / 34%), transparent 62%),
-    radial-gradient(48rem 48rem at -8% 108%, rgb(99 219 198 / 20%), transparent 58%),
-    linear-gradient(180deg, #f8f9fd 0%, #eef1f8 100%);
+  background: linear-gradient(180deg, #f8f9fd 0%, #eef1f8 100%);
   background-attachment: fixed;
 }
 
@@ -107,15 +104,8 @@ p {
 }
 
 :focus-visible {
-  outline: 3px solid rgb(90 84 232 / 45%);
+  outline: 3px solid var(--primary);
   outline-offset: 2px;
-}
-
-/* Los campos personalizan su anillo de foco con box-shadow. */
-.input:focus-visible,
-.select:focus-visible,
-.task__checkbox:focus-visible {
-  outline: none;
 }
 
 .skip-link {
@@ -211,16 +201,15 @@ p {
   display: grid;
   place-items: center;
   flex: 0 0 auto;
-  width: 38px;
-  height: 38px;
+  width: 44px;
+  height: 44px;
   padding: 0;
-  border: 1px solid rgb(255 255 255 / 90%);
+  border: 1px solid var(--control-border);
   border-radius: 50%;
-  background: rgb(255 255 255 / 65%);
+  background: var(--surface);
   box-shadow: 0 10px 24px -18px rgb(20 24 38 / 40%);
   color: var(--text-soft);
   cursor: pointer;
-  backdrop-filter: blur(10px);
   transition:
     transform var(--transition),
     background-color var(--transition),
@@ -266,15 +255,14 @@ p {
   align-items: center;
   gap: 0.5rem;
   padding: 0.5rem 0.8rem;
-  border: 1px solid rgb(255 255 255 / 90%);
+  border: 1px solid var(--line);
   border-radius: 999px;
-  background: rgb(255 255 255 / 65%);
+  background: var(--surface);
   box-shadow: 0 10px 24px -18px rgb(20 24 38 / 40%);
   color: var(--text-soft);
   font-size: 0.78rem;
   font-weight: 600;
   white-space: nowrap;
-  backdrop-filter: blur(10px);
 }
 
 .today-chip svg {
@@ -290,19 +278,10 @@ p {
   gap: 1.15rem;
   overflow: hidden;
   padding: clamp(1rem, 3vw, 1.65rem);
-  border: 1px solid rgb(255 255 255 / 80%);
+  border: 1px solid var(--line);
   border-radius: var(--radius-xl);
   background: var(--surface);
   box-shadow: var(--shadow-card);
-}
-
-/* Pequeña cinta de color superior, puramente decorativa. */
-.panel::before {
-  content: "";
-  position: absolute;
-  inset: 0 0 auto;
-  height: 3px;
-  background: linear-gradient(90deg, var(--primary), #14b8a6 60%, #f5a623);
 }
 
 /* --------------------------------------------------------------------------
@@ -329,9 +308,9 @@ p {
   display: block;
   margin: 0 0 0.35rem 0.15rem;
   color: var(--text-faint);
-  font-size: 0.68rem;
+  font-size: 0.72rem;
   font-weight: 700;
-  letter-spacing: 0.09em;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
 }
 
@@ -340,7 +319,7 @@ p {
   width: 100%;
   min-height: 48px;
   padding: 0.72rem 0.9rem;
-  border: 1px solid var(--line);
+  border: 1px solid var(--control-border);
   border-radius: var(--radius-sm);
   background: var(--surface-muted);
   color: var(--text);
@@ -351,18 +330,18 @@ p {
 }
 
 .input::placeholder {
-  color: #7b8496;
+  color: var(--text-faint);
+  opacity: 1;
 }
 
 .input:hover,
 .select:hover {
-  border-color: #d5daea;
+  border-color: var(--control-border-hover);
 }
 
 .input:focus,
 .select:focus {
   border-color: var(--primary);
-  outline: none;
   background: #fff;
   box-shadow: var(--ring);
 }
@@ -444,7 +423,7 @@ p {
 }
 
 .btn--ghost {
-  border-color: var(--line);
+  border-color: var(--control-border);
   background: var(--surface-muted);
   color: var(--text-soft);
 }
@@ -460,7 +439,7 @@ p {
 }
 
 .btn--danger:hover {
-  background: #bf3a3a;
+  background: #a83232;
 }
 
 .edit-hint {
@@ -568,7 +547,7 @@ p {
   width: 0;
   height: 100%;
   border-radius: inherit;
-  background: linear-gradient(90deg, #6f68f6, #4f46e5 55%, #14b8a6);
+  background: linear-gradient(90deg, var(--primary), var(--primary-strong));
   transition: width 350ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -594,13 +573,13 @@ p {
   display: inline-flex;
   align-items: center;
   gap: 0.38rem;
-  min-height: 36px;
+  min-height: 44px;
   padding: 0.5rem 0.7rem;
   border: 0;
   border-radius: 9px;
   background: transparent;
   color: var(--text-soft);
-  font-size: 0.78rem;
+  font-size: 0.8rem;
   font-weight: 600;
   cursor: pointer;
   transition:
@@ -625,8 +604,8 @@ p {
   padding: 0.05rem 0.34rem;
   border-radius: 999px;
   background: #e8ebf3;
-  color: #667085;
-  font-size: 0.68rem;
+  color: var(--text-soft);
+  font-size: 0.72rem;
   font-weight: 700;
   text-align: center;
   font-variant-numeric: tabular-nums;
@@ -653,7 +632,7 @@ p {
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: #22c55e;
+  background: var(--success);
   box-shadow: 0 0 0 3px rgb(34 197 94 / 12%);
 }
 
@@ -668,7 +647,7 @@ p {
 
 .task {
   display: grid;
-  grid-template-columns: 30px minmax(0, 1fr) auto;
+  grid-template-columns: 44px minmax(0, 1fr) auto;
   align-items: center;
   gap: 0.7rem;
   padding: 0.8rem 0.85rem;
@@ -701,9 +680,9 @@ p {
 .task__check {
   display: grid;
   place-items: center;
-  width: 30px;
-  height: 30px;
-  border-radius: 8px;
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
   cursor: pointer;
 }
 
@@ -712,7 +691,7 @@ p {
   width: 21px;
   height: 21px;
   margin: 0;
-  border: 2px solid #c3cad9;
+  border: 2px solid var(--control-border);
   border-radius: 6px;
   background: #fff;
   cursor: pointer;
@@ -758,10 +737,6 @@ p {
 .task__checkbox:checked::after {
   opacity: 1;
   transform: rotate(45deg) scale(1);
-}
-
-.task__checkbox:focus-visible {
-  box-shadow: var(--ring);
 }
 
 .task__content {
@@ -843,24 +818,17 @@ p {
   display: flex;
   align-items: center;
   gap: 0.12rem;
-  opacity: 0.65;
-  transition: opacity var(--transition);
-}
-
-.task:hover .task__actions,
-.task:focus-within .task__actions {
-  opacity: 1;
 }
 
 .icon-btn {
   display: grid;
   place-items: center;
-  width: 32px;
-  height: 32px;
+  width: 44px;
+  height: 44px;
   border: 0;
-  border-radius: 8px;
+  border-radius: 10px;
   background: transparent;
-  color: var(--text-faint);
+  color: var(--text-soft);
   cursor: pointer;
   transition:
     background-color var(--transition),
@@ -1011,7 +979,7 @@ p {
 }
 
 .dialog__actions .btn {
-  min-height: 42px;
+  min-height: 44px;
 }
 
 .toast {
@@ -1140,13 +1108,9 @@ p {
   }
 
   .task {
-    grid-template-columns: 28px minmax(0, 1fr) auto;
+    grid-template-columns: 44px minmax(0, 1fr) auto;
     gap: 0.55rem;
     padding: 0.75rem 0.7rem;
-  }
-
-  .task__actions {
-    opacity: 1;
   }
 }
 
@@ -1188,21 +1152,12 @@ p {
   }
 
   .task {
-    grid-template-columns: 26px minmax(0, 1fr) auto;
-    gap: 0.45rem;
-  }
-
-  .task__check {
-    width: 26px;
+    grid-template-columns: 44px minmax(0, 1fr) auto;
+    gap: 0.35rem;
   }
 
   .task__actions {
     gap: 0;
-  }
-
-  .icon-btn {
-    width: 30px;
-    height: 30px;
   }
 
   .task__date {
@@ -1218,12 +1173,6 @@ p {
   }
 }
 
-@media (hover: none) {
-  .task__actions {
-    opacity: 1;
-  }
-}
-
 /* Respeta a quien prefiere menos movimiento. */
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -1233,6 +1182,11 @@ p {
     animation-iteration-count: 1 !important;
     scroll-behavior: auto !important;
     transition-duration: 0.01ms !important;
+  }
+
+  .theme-toggle:hover,
+  .btn:active {
+    transform: none;
   }
 }
 
@@ -1254,6 +1208,8 @@ p {
   --text-soft: #b6c0d2;
   --text-faint: #919bad;
   --line: #2a3244;
+  --control-border: #5a6a82;
+  --control-border-hover: #8a96a8;
   --primary: #8e86ff;
   --primary-strong: #c3bdff;
   --primary-soft: #262246;
@@ -1269,11 +1225,7 @@ p {
 }
 
 [data-theme="dark"] body {
-  background:
-    radial-gradient(circle at 1px 1px, rgb(255 255 255 / 4.5%) 1px, transparent 0) 0 0 / 22px 22px,
-    radial-gradient(58rem 58rem at 88% -10%, rgb(109 91 255 / 22%), transparent 62%),
-    radial-gradient(48rem 48rem at -8% 108%, rgb(20 184 166 / 10%), transparent 58%),
-    linear-gradient(180deg, #0b0e16 0%, #090b11 100%);
+  background: linear-gradient(180deg, #0b0e16 0%, #090b11 100%);
 }
 
 [data-theme="dark"] ::selection {
@@ -1294,14 +1246,10 @@ p {
 }
 
 [data-theme="dark"] .today-chip {
-  background: rgb(19 24 36 / 78%);
-  border-color: rgb(255 255 255 / 8%);
   box-shadow: 0 10px 24px -18px rgb(0 0 0 / 80%);
 }
 
 [data-theme="dark"] .theme-toggle {
-  background: rgb(19 24 36 / 78%);
-  border-color: rgb(255 255 255 / 8%);
   box-shadow: 0 10px 24px -18px rgb(0 0 0 / 80%);
   color: #d7d2ff;
 }
@@ -1316,24 +1264,19 @@ p {
   border-color: rgb(255 255 255 / 7%);
 }
 
-[data-theme="dark"] .panel::before {
-  background: linear-gradient(90deg, #8e86ff, #22d3c5 60%, #fbbf24);
-  opacity: 0.9;
-}
-
 [data-theme="dark"] .input,
 [data-theme="dark"] .select {
   background: #0f1420;
-  border-color: #2b3345;
+  border-color: var(--control-border);
 }
 
 [data-theme="dark"] .input::placeholder {
-  color: #7f8a9e;
+  color: #9aa4b8;
 }
 
 [data-theme="dark"] .input:hover,
 [data-theme="dark"] .select:hover {
-  border-color: #3b465d;
+  border-color: var(--control-border-hover);
 }
 
 [data-theme="dark"] .input:focus,
@@ -1365,7 +1308,7 @@ p {
 
 [data-theme="dark"] .btn--ghost {
   background: #1a2130;
-  border-color: #2b3345;
+  border-color: var(--control-border);
   color: var(--text-soft);
 }
 
@@ -1375,12 +1318,12 @@ p {
 }
 
 [data-theme="dark"] .btn--danger {
-  background: #d64545;
+  background: #bf3a3a;
   color: #fff;
 }
 
 [data-theme="dark"] .btn--danger:hover {
-  background: #bf3a3a;
+  background: #a83232;
 }
 
 [data-theme="dark"] .inline-warning {
@@ -1389,10 +1332,6 @@ p {
 
 [data-theme="dark"] .progress {
   background: #222a3a;
-}
-
-[data-theme="dark"] .progress__bar {
-  background: linear-gradient(90deg, #8e86ff, #6d63f5 55%, #22d3c5);
 }
 
 [data-theme="dark"] .filters {
@@ -1453,7 +1392,7 @@ p {
 
 [data-theme="dark"] .task__checkbox {
   background: #0f1420;
-  border-color: #3c465c;
+  border-color: var(--control-border);
 }
 
 [data-theme="dark"] .task__checkbox:hover {
@@ -1477,10 +1416,6 @@ p {
 
 [data-theme="dark"] .task__meta-divider {
   color: #3b4458;
-}
-
-[data-theme="dark"] .task__actions {
-  opacity: 0.8;
 }
 
 [data-theme="dark"] .priority-badge[data-priority="alta"] {

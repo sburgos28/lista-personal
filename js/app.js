@@ -35,6 +35,7 @@ const dom = {
   progressBar: document.querySelector('#progress-bar'),
   filterButtons: [...document.querySelectorAll('[data-filter]')],
   storageWarning: document.querySelector('#storage-warning'),
+  storageWarningText: document.querySelector('#storage-warning-text'),
   storageNote: document.querySelector('#storage-note'),
   todayLabel: document.querySelector('#today-label'),
   deleteDialog: document.querySelector('#delete-dialog'),
@@ -65,6 +66,7 @@ const store = createTaskStore({
   // Si localStorage falla (modo privado, cuota llena...), avisamos de forma
   // persistente. Los cambios siguen funcionando en memoria.
   onSaveError: showStorageWarning,
+  onLoadError: showLoadWarning,
 });
 
 let currentFilter = 'all';
@@ -88,6 +90,15 @@ function capitalize(text) {
 }
 
 function showStorageWarning() {
+  dom.storageWarningText.textContent =
+    'Este navegador no permite guardar datos localmente. Tus cambios se perderán al recargar.';
+  dom.storageWarning.hidden = false;
+  dom.storageNote.hidden = true;
+}
+
+function showLoadWarning() {
+  dom.storageWarningText.textContent =
+    'No se pudieron leer las tareas guardadas. Se ha empezado una lista vacía.';
   dom.storageWarning.hidden = false;
   dom.storageNote.hidden = true;
 }
